@@ -1,8 +1,10 @@
 var inquirer = require('inquirer');
 const fs = require('fs');
-const fileName = 'README.md';
+const chalkPipe = require('chalk-pipe')
 const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt')
+const fileName = 'logo.svg';
 
+inquirer.registerPrompt('chalk-pipe', require('inquirer-chalk-pipe'));
 inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 //  Using inquirer and prompt to generate my questions into my command line.
 inquirer
@@ -14,9 +16,10 @@ inquirer
             maxLength: 3
         },
         {
-            type: "input",
-            name: "descriptionQuestion",
-            message: "What is the description of your project?"
+            type: "chalk-pipe",
+            name: "pickAColor",
+            message: "Choose a text color",
+            
         },
         {
             type: "input",
@@ -58,7 +61,7 @@ inquirer
     //  Writing my prompt data into my README file
     .then((promptData) => {
         console.log(promptData);
-        writeToReadMe(promptData);
+        writeToSvg(promptData);
     })
     //  If there are any errors the "There is an error" will generate
     .catch((error) => {
@@ -68,7 +71,7 @@ inquirer
     });
 
       //  Creating my function variables to write the prompt information to my README file
-      function writeToReadMe(answers) {
+      function writeToSvg(answers) {
         var title = answers.titleQuestion;
         var description = answers.descriptionQuestion;
         var installation = answers.installationQuestion;
@@ -79,23 +82,8 @@ inquirer
         var userName = answers.userNameQuestion;
         var email = answers.emailQuestion;
     
-        // Creating the badge for each license choice
-        function renderLicenseBadge(licenseBadge) {
-            let yourLicense = ''
-            if (licenseBadge === 'MIT') {
-                yourLicense = `![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)`
-            } else if (licenseBadge === 'Apache 2.0') {
-                yourLicense = `![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)`
-            } else if (licenseBadge === 'GNU GPL 3.0') {
-                yourLicense = `![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)`
-            } else {
-                yourLicense = '![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)'
-            }
-            return yourLicense;
-        }
-    
         // Created the function to write my README in the following format
-        function returnReadmeContent() {
+        function returnSvgContent() {
             return `
     ${renderLicenseBadge(license)}
         
@@ -145,7 +133,7 @@ inquirer
         }
     
         //  This creates the README with the correct filename 
-        fs.writeFile(fileName, returnReadmeContent(), 'utf-8', err => {
+        fs.writeFile(fileName, returnSvgContent(), 'utf-8', err => {
             err ? console.error(err) : console.log('readme file created!')
         });
     
