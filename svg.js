@@ -31,32 +31,7 @@ inquirer
             name: "usageInformationQuestion",
             message: "What is the usage information for your project?"
         },
-        {
-            type: "list",
-            name: "licenseQuestion",
-            message: "Choose a license for your project",
-            choices: ['MIT', 'APACHE 2.0', 'GNU General Public Lcense 3.0', 'Boost Software 1.0']
-        },
-        {
-            type: "input",
-            name: "contributionGuidelinesQuestion",
-            message: "What are the contribution guidelines for your project?"
-        },
-        {
-            type: "input",
-            name: "testInstructionsQuestion",
-            message: "What are the test instuctions for your project?"
-        },
-        {
-            type: "input",
-            name: "userNameQuestion",
-            message: "What is your GitHub username?"
-        },
-        {
-            type: "input",
-            name: "emailQuestion",
-            message: "What is your email?"
-        },
+        
     ])
     //  Writing my prompt data into my README file
     .then((promptData) => {
