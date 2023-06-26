@@ -1,7 +1,7 @@
 // Importing Triangle, Square, Circle classes from ./shapes.js
 const { Triangle, Square, Circle } = require("./shapes.js");
 
-// Testing for a triangle with a blue background to render
+// Testing for a triangle with a yellow background to render
 describe("Triangle test", () => {
   test("test for a triangle with a yellow background", () => {
     const shape = new Triangle();
